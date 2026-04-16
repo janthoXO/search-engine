@@ -1,3 +1,3 @@
 export type Counter = {
-  amount: number;
+  amount: number
 }

@@ -1,7 +1,7 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { ThemeProvider } from "./components/theme-provider";
-import { CounterProvider } from "./context/CounterContext";
-import { CounterPage } from "./pages/CounterPage";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
+import { ThemeProvider } from "./components/theme-provider"
+import { CounterProvider } from "./context/CounterContext"
+import { CounterPage } from "./pages/CounterPage"
 
 export function App() {
   return (
@@ -15,7 +15,7 @@ export function App() {
         </BrowserRouter>
       </CounterProvider>
     </ThemeProvider>
-  );
+  )
 }
 
-export default App;
+export default App

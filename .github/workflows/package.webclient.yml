@@ -1,0 +1,47 @@
+name: Package Web Client
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "webclient/**"
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: webclient
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          cache: true
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: "pnpm"
+          cache-dependency-path: pnpm-lock.yaml
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build Docker Image
+        run: docker build -t webclient:latest .
+
+      - name: Save Docker Image
+        run: docker save webclient:latest -o webclient-latest.tar
+
+      - name: Upload Docker Image
+        uses: actions/upload-artifact@v6
+        with:
+          name: docker-image-latest
+          path: webclient-latest.tar
+          if-no-files-found: error

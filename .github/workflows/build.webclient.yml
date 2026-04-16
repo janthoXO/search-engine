@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - "webclient/**"
+  workflow_call:
 
 jobs:
   build:
@@ -17,9 +18,10 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v6
         with:
           cache: true
+          package_json_file: webclient/package.json
 
       - name: Setup Node.js
         uses: actions/setup-node@v6

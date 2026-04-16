@@ -49,5 +49,5 @@ jobs:
         uses: actions/upload-artifact@v6
         with:
           name: docker-image-latest
-          path: webclient-latest.tar
+          path: webclient/webclient-latest.tar
           if-no-files-found: error

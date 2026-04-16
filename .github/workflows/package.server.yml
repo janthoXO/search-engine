@@ -49,5 +49,5 @@ jobs:
         uses: actions/upload-artifact@v6
         with:
           name: docker-image-latest
-          path: server-latest.tar
+          path: server/server-latest.tar
           if-no-files-found: error

@@ -6,11 +6,13 @@ on:
       - main
     paths:
       - "server/**"
+      - ".github/workflows/build.server.yml"
+      - ".github/workflows/package.server.yml"
 
 jobs:
   build:
     uses: ./.github/workflows/build.server.yml
-    
+
   package:
     runs-on: ubuntu-latest
     defaults:

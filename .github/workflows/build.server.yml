@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - "server/**"
+      - ".github/workflows/build.server.yml"
   workflow_call:
 
 jobs:

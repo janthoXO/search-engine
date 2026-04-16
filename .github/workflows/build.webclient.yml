@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - "webclient/**"
+      - ".github/workflows/build.webclient.yml"
   workflow_call:
 
 jobs:

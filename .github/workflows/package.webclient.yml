@@ -6,6 +6,8 @@ on:
       - main
     paths:
       - "webclient/**"
+      - ".github/workflows/build.webclient.yml"
+      - ".github/workflows/package.webclient.yml"
 
 jobs:
   build:

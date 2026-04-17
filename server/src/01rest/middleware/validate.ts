@@ -8,11 +8,9 @@ export function validateQuery(
   const q = req.query.q;
 
   if (typeof q !== "string" || q.trim().length === 0) {
-    res
-      .status(400)
-      .json({
-        error: "Query parameter 'q' is required and must be a non-empty string",
-      });
+    res.status(400).json({
+      error: "Query parameter 'q' is required and must be a non-empty string",
+    });
     return;
   }
 

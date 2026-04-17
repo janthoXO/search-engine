@@ -3,7 +3,7 @@ import { searchRepo } from "../03repo/elastic.repo.js";
 export class SearchService {
   async getSuggestions(q: string) {
     const result = await searchRepo.suggest(q);
-    
+
     const suggestions = result.hits.hits.map((hit) => ({
       title: (hit._source as { title: string; url: string }).title,
       url: (hit._source as { title: string; url: string }).url,
@@ -17,9 +17,10 @@ export class SearchService {
     const from = (page - 1) * size;
     const result = await searchRepo.search(q, from, size);
 
-    const total = typeof result.hits.total === "number"
-      ? result.hits.total
-      : (result.hits.total?.value ?? 0);
+    const total =
+      typeof result.hits.total === "number"
+        ? result.hits.total
+        : (result.hits.total?.value ?? 0);
 
     const hits = result.hits.hits.map((hit) => ({
       url: hit._source!.url,

@@ -16,7 +16,7 @@ router.get("/suggest", validateQuery, async (req: Request, res: Response, next: 
   }
 });
 
-router.get("/", validateQuery, async (req: Request, res: Response, next: NextFunction) => {
+router.get("/search", validateQuery, async (req: Request, res: Response, next: NextFunction) => {
   const q = (req.query.q as string).trim();
   const page = Math.max(1, parseInt((req.query.page as string) ?? "1", 10));
 

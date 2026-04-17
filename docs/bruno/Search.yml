@@ -10,6 +10,10 @@ http:
     - name: q
       value: ai
       type: query
+    - name: page
+      value: "2"
+      type: query
+      disabled: true
   auth: inherit
 
 settings:

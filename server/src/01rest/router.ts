@@ -15,7 +15,7 @@ export function initRouter(): Promise<void> {
   });
 
   apiRouter.use("/example", exampleRouter);
-  apiRouter.use("/search", searchRouter);
+  apiRouter.use("/", searchRouter);
 
   const app = express();
 

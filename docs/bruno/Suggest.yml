@@ -5,7 +5,7 @@ info:
 
 http:
   method: GET
-  url: "{{base_url}}/api/search/suggest?q=ai"
+  url: "{{base_url}}/api/suggest?q=ai"
   params:
     - name: q
       value: ai

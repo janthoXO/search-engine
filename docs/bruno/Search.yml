@@ -5,15 +5,18 @@ info:
 
 http:
   method: GET
-  url: "{{base_url}}/api/search?q=ai"
+  url: "{{base_url}}/api/search?q=general intelligence&sessionId=1"
   params:
     - name: q
-      value: ai
+      value: general intelligence
       type: query
     - name: page
       value: "2"
       type: query
       disabled: true
+    - name: sessionId
+      value: "1"
+      type: query
   auth: inherit
 
 settings:

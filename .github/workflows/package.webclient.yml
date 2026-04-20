@@ -1,13 +1,19 @@
 name: Package Web Client
 
 on:
-  push:
+  pull_request:
     branches:
       - main
     paths:
       - "webclient/**"
       - ".github/workflows/build.webclient.yml"
       - ".github/workflows/package.webclient.yml"
+  workflow_call:
+    inputs:
+      version:
+        required: false
+        type: string
+        default: 'latest'
 
 jobs:
   build:
@@ -39,15 +45,19 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Set package.json version
+        if: ${{ inputs.version && inputs.version != 'latest' }}
+        run: pnpm version ${{ inputs.version }} --no-git-tag-version
+
       - name: Build Docker Image
         run: docker build -t webclient:latest .
 
       - name: Save Docker Image
-        run: docker save webclient:latest -o webclient-latest.tar
+        run: docker save webclient:latest -o webclient-${{ inputs.version || 'latest' }}.tar
 
       - name: Upload Docker Image
         uses: actions/upload-artifact@v6
         with:
-          name: docker-image-latest
-          path: webclient/webclient-latest.tar
+          name: docker-image-${{ inputs.version || 'latest' }}
+          path: webclient/webclient-${{ inputs.version || 'latest' }}.tar
           if-no-files-found: error

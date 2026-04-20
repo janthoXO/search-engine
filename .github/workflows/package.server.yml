@@ -1,13 +1,19 @@
 name: Package Server
 
 on:
-  push:
+  pull_request:
     branches:
       - main
     paths:
       - "server/**"
       - ".github/workflows/build.server.yml"
       - ".github/workflows/package.server.yml"
+  workflow_call:
+    inputs:
+      version:
+        required: false
+        type: string
+        default: 'latest'
 
 jobs:
   build:
@@ -39,15 +45,19 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Set package.json version
+        if: ${{ inputs.version && inputs.version != 'latest' }}
+        run: pnpm version ${{ inputs.version }} --no-git-tag-version
+
       - name: Build Docker Image
         run: docker build -t server:latest .
 
       - name: Save Docker Image
-        run: docker save server:latest -o server-latest.tar
+        run: docker save server:latest -o server-${{ inputs.version || 'latest' }}.tar
 
       - name: Upload Docker Image
         uses: actions/upload-artifact@v6
         with:
-          name: docker-image-latest
-          path: server/server-latest.tar
+          name: docker-image-${{ inputs.version || 'latest' }}
+          path: server/server-${{ inputs.version || 'latest' }}.tar
           if-no-files-found: error

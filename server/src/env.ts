@@ -6,6 +6,10 @@ dotenv.config();
 export const EnvSchema = z.object({
   PORT: z.coerce.number().default(8080),
   DEBUG: z.coerce.boolean().default(false),
+  ES_HOST: z.url().default("http://localhost:9200"),
+  ES_USERNAME: z.string().default("elastic"),
+  ES_PASSWORD: z.string().default("changeme"),
+  ES_INDEX: z.string().default("pages"),
 });
 
 export type Env = z.infer<typeof EnvSchema>;
